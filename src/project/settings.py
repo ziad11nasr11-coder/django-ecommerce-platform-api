@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'coupons',
     'search',
     'notifications',
+    'mptt',
 ]
 
 MIDDLEWARE = [
