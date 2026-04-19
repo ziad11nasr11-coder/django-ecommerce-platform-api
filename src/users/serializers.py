@@ -59,3 +59,21 @@ class ResetPasswordSerializer(serializers.Serializer):
     token = serializers.CharField()
     new_password = serializers.CharField(write_only=True)
 
+class SellerProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SellerProfile
+        fields = ['country', 'city', 'address', 'is_verified']
+
+class CustomerProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomerProfile
+        fields = ['city', 'address']
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    seller_profile = SellerProfileSerializer(required=False)
+    customer_profile = CustomerProfileSerializer(required=False)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'user_type', 'seller_profile', 'customer_profile']
+
